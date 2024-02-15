@@ -44,6 +44,7 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: "^0.13.1"
 flutter_icons:
+  title: TrashPickup
   android: true
   ios: true
   image_path: "assets/icon/icon2.png"
