@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CompletePickup extends StatelessWidget {
-  const CompletePickup({super.key});
+  const CompletePickup({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,11 @@ class CompletePickup extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              PickupNotification(date: '02-01-2024', cost: '1070', index: 3),
+              PickupNotification(data: pickupData[0]),
               SizedBox(height: 10),
-              PickupNotification(date: '25-11-2023', cost: '870', index: 2),
+              PickupNotification(data: pickupData[1]),
               SizedBox(height: 10),
-              PickupNotification(date: '02-05-2023', cost: '515', index: 1),
+              PickupNotification(data: pickupData[2]),
             ],
           ),
         ),
@@ -40,15 +40,9 @@ class CompletePickup extends StatelessWidget {
 }
 
 class PickupNotification extends StatelessWidget {
-  final String date, cost;
-  final int index;
+  final Map<String, String> data;
 
-  const PickupNotification({
-    Key? key,
-    required this.date,
-    required this.cost,
-    required this.index,
-  }) : super(key: key);
+  const PickupNotification({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +51,8 @@ class PickupNotification extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PickupDetailPage(date: date, cost: cost),
+            builder: (context) =>
+                PickupDetailPage(date: data['date']!, cost: data['cost']!),
           ),
         );
       },
@@ -85,7 +80,7 @@ class PickupNotification extends StatelessWidget {
               ),
               Image.asset('assets/images/checkmark.png'),
               Text(
-                '   $date \n   Rs $cost ',
+                '   ${data['date']} \n   Rs ${data['cost']} ',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -104,8 +99,8 @@ class PickupNotification extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          PickupDetailPage(date: date, cost: cost),
+                      builder: (context) => PickupDetailPage(
+                          date: data['date']!, cost: data['cost']!),
                     ),
                   );
                 },
@@ -230,3 +225,10 @@ class Invoice extends StatelessWidget {
     );
   }
 }
+
+// Example data
+List<Map<String, String>> pickupData = [
+  {'date': '02-01-2024', 'cost': '1070'},
+  {'date': '25-11-2023', 'cost': '870'},
+  {'date': '02-05-2023', 'cost': '515'},
+];

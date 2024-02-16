@@ -5,6 +5,29 @@ class PendingPickup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<PendingData> pendingDataList = [
+      PendingData(
+          name: 'Nayan Raut',
+          address: 'Karla Road \n Wardha',
+          date: '15 Jan 2024'),
+      PendingData(
+          name: 'Shrawani Gulkari',
+          address: 'New Road \n Wardha',
+          date: '15 Feb 2024'),
+      PendingData(
+          name: 'Ninad Lunge',
+          address: 'Known Road \n Wardha',
+          date: '15 March 2024'),
+      PendingData(
+          name: 'Ninad Lunge',
+          address: 'Known Road \n Wardha',
+          date: '15 March 2024'),
+      PendingData(
+          name: 'Ninad Lunge',
+          address: 'Known Road \n Wardha',
+          date: '15 March 2024'),
+    ];
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -26,14 +49,14 @@ class PendingPickup extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              PendingWidget(
-                  name: 'Nayan Raut',
-                  address: 'Karla Road \n Wardha',
-                  date: '1070'),
-              PendingWidget(
-                  name: 'Shrawani Gulkari',
-                  address: 'New Road \n Wardha',
-                  date: '1070'),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: pendingDataList.length,
+                itemBuilder: (context, index) {
+                  return PendingWidget(data: pendingDataList[index]);
+                },
+              ),
             ],
           ),
         ),
@@ -42,12 +65,16 @@ class PendingPickup extends StatelessWidget {
   }
 }
 
-class PendingWidget extends StatelessWidget {
+class PendingData {
   final String name, address, date;
 
-  const PendingWidget(
-      {Key? key, required this.name, required this.address, required this.date})
-      : super(key: key);
+  PendingData({required this.name, required this.address, required this.date});
+}
+
+class PendingWidget extends StatelessWidget {
+  final PendingData data;
+
+  const PendingWidget({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,54 +104,96 @@ class PendingWidget extends StatelessWidget {
                 width: 300,
                 height: 10,
               ),
-              Text(
-                '$name \n\n Address:  $address \n\n Pickup Date: $date',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: ' ${data.name} \n ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Address: ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '${data.address} \n ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Pickup Date: ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '${data.date}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
-                  height:
-                      10), // Add some space between text and the new container
+                height: 10,
+              ),
               Container(
-                width: 150, // Set the width as needed
-                height: 50, // Set the height as needed
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.black, width: 1), // Stroke
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 2,
-                      blurRadius: 2,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Additional Info', // Add your text here
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                width: 190,
+                height: 45,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 2.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.orange[300], // Background color
+                      onPrimary: Colors.black, // Text color
+                      side: BorderSide(color: Colors.black), // Border color
+                      shadowColor: Colors.grey, // Shadow color
+                      elevation: 5,
+                      // Elevation (controls the intensity of the shadow)
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(15), // Border radius
                       ),
                     ),
-                    Icon(
-                      Icons.info, // Add your icon here
-                      color: Colors.white,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Open with map',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Image.asset(
+                            'assets/images/google-maps.png',
+                            width: 20,
+                            height: 20,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 5),
             ],
           ),
         ),
@@ -132,48 +201,3 @@ class PendingWidget extends StatelessWidget {
     );
   }
 }
-
-// class CustomBottomNavigationBar extends StatelessWidget {
-//   final int currentIndex;
-//   final Function(int) onTap;
-//
-//   const CustomBottomNavigationBar({
-//     Key? key,
-//     required this.currentIndex,
-//     required this.onTap,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-//       child: Container(
-//         child: BottomNavigationBar(
-//           items: [
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.menu),
-//               label: 'Menu',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.message_outlined),
-//               label: 'Notification',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.settings_outlined),
-//               label: 'Settings',
-//             ),
-//           ],
-//           currentIndex: currentIndex,
-//           onTap: onTap,
-//           elevation: 0.0,
-//           backgroundColor: Colors.transparent,
-//           selectedItemColor: Colors.green,
-//         ),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(17.0),
-//           border: Border.all(color: Colors.black),
-//         ),
-//       ),
-//     );
-//   }
-// }
