@@ -20,27 +20,40 @@ class Home extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // const Padding(
-            //   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 05.0),
-            //   child: Text(
-            //     'Choose a Service',
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.bold,
-            //       fontSize: 20.0,
-            //     ),
-            //   ),
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 10.0),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/user.png'),
+                    radius: 35.0,
+                    backgroundColor: Colors.transparent,
+                  ),
+                ),
+                SizedBox(width: 10.0),
+                Text(
+                  'Nayan Raut \nnayanraut1412@gmail.com',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 5.0, vertical: 50.0),
+                      horizontal: 5.0, vertical: 30.0),
                   child: Container(
                     width: 150.0,
                     height: 200.0,
@@ -151,6 +164,14 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            //SizedBox(height: 2),
+            Center(
+              child: Image.asset(
+                'assets/images/pickupboy.png',
+                width: 230,
+                height: 210,
+              ),
             ),
           ],
         ),
