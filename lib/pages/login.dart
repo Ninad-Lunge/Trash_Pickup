@@ -185,8 +185,8 @@ class Login extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.orange[300], // Background color
-                      onPrimary: Colors.black, // Text color
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.orange[300], // Text color
                       side: BorderSide(color: Colors.black), // Border color
                     ),
                     onPressed: () {
@@ -221,8 +221,8 @@ class Login extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 5.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.orange[300], // Background color
-                      onPrimary: Colors.black, // Text color
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.orange[300], // Text color
                       side: BorderSide(color: Colors.black), // Border color
                     ),
                     onPressed: () {

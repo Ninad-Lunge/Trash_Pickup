@@ -155,8 +155,8 @@ class PendingWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 2.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.orange[300], // Background color
-                      onPrimary: Colors.black, // Text color
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.orange[300], // Text color
                       side: BorderSide(color: Colors.black), // Border color
                       shadowColor: Colors.grey, // Shadow color
                       elevation: 5,

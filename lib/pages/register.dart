@@ -128,8 +128,8 @@ class Register extends StatelessWidget {
                               const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.orange[300], // Background color
-                              onPrimary: Colors.black, // Text color
+                              foregroundColor: Colors.black,
+                              backgroundColor: Colors.orange[300], // Text color
                               side: BorderSide(
                                   color: Colors.black), // Border color
                             ),
@@ -175,8 +175,8 @@ class Register extends StatelessWidget {
                               const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.orange[300], // Background color
-                              onPrimary: Colors.black, // Text color
+                              foregroundColor: Colors.black,
+                              backgroundColor: Colors.orange[300], // Text color
                               side: BorderSide(
                                   color: Colors.black), // Border color
                             ),
