@@ -38,11 +38,20 @@ dependencies:
 
   #dependencies:
   lottie: ^3.0.0
+  google_sign_in: ^6.2.1
+  flutter_lints: ^1.0.0
+  firebase_core: ^2.25.4
+  firebase_auth: ^4.17.4
+  cloud_firestore: ^4.15.5
+  geolocator: ^11.0.0
+  google_maps_flutter: ^2.5.3
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.13.1"
+
 flutter_icons:
   title: TrashPickup
   android: true

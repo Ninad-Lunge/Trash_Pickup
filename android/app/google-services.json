@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "82501261467",
+    "project_id": "sustainx-9d820",
+    "storage_bucket": "sustainx-9d820.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82501261467:android:0f7e4ae869f7b19a84ce3e",
+        "android_client_info": {
+          "package_name": "com.example.sustain_x"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82501261467-f5il75080usk90g2v5nvde4haqj0mtkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM2d_ioKhP7NmnW9gIu8thE0ghEhQD9yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82501261467-f5il75080usk90g2v5nvde4haqj0mtkq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "82501261467-8gsu88aocld8clm1v5o4s6bd5rr9vmqd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sustainx.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82501261467:android:e2f7930670d6350984ce3e",
+        "android_client_info": {
+          "package_name": "com.example.trashpickup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82501261467-f5il75080usk90g2v5nvde4haqj0mtkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM2d_ioKhP7NmnW9gIu8thE0ghEhQD9yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82501261467-f5il75080usk90g2v5nvde4haqj0mtkq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "82501261467-8gsu88aocld8clm1v5o4s6bd5rr9vmqd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sustainx.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,16 +20,16 @@ class Home extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 10.0),
                   child: CircleAvatar(
                     backgroundImage: AssetImage('assets/images/user.png'),
@@ -146,12 +146,12 @@ class Home extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pushNamed(context, '/pending_pickup');
                               },
-                              child: Text(
+                              child: const Text(
                                 'Pending Pickups',
                                 textAlign: TextAlign.center,
                               ),
                               style: OutlinedButton.styleFrom(
-                                side: BorderSide(color: Colors.green),
+                                side: const BorderSide(color: Colors.green),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(17.0),
                                 ),
@@ -166,11 +166,14 @@ class Home extends StatelessWidget {
               ],
             ),
             //SizedBox(height: 2),
-            Center(
-              child: Image.asset(
-                'assets/images/pickupboy.png',
-                width: 230,
-                height: 210,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Image.asset(
+                  'assets/images/pickupboy.png',
+                  width: 200,
+                  height: 200,
+                ),
               ),
             ),
           ],
@@ -180,7 +183,7 @@ class Home extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
         child: Container(
           child: BottomNavigationBar(
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.menu),
                 label: 'Menu',
