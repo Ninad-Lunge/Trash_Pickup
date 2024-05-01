@@ -7,7 +7,7 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Your Profile',
           style: TextStyle(
             fontSize: 28,
@@ -22,7 +22,7 @@ class Settings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/user.png'),
                 radius: 40.0,
