@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:trashpickup/pages/add_pickup_details.dart';
+import 'map_page.dart';
 
 class PendingPickup extends StatelessWidget {
   const PendingPickup({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class PendingPickup extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('pickups').snapshots(),
+        stream: FirebaseFirestore.instance.collection('pickups').where('status', isEqualTo: 'Pending').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
@@ -56,7 +58,9 @@ class PendingPickup extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: pendingDataList.length,
                     itemBuilder: (context, index) {
-                      return PendingWidget(data: pendingDataList[index]);
+                      final docId = snapshot.data!.docs[index].id; // Retrieve the document ID here
+                      print('${docId}\n');
+                      return PendingWidget(data: pendingDataList[index], docId: docId); // Pass the document ID here
                     },
                   ),
                 ],
@@ -83,8 +87,9 @@ class PendingData {
 
 class PendingWidget extends StatelessWidget {
   final PendingData data;
+  final String docId;
 
-  const PendingWidget({Key? key, required this.data}) : super(key: key);
+  const PendingWidget({Key? key, required this.data, required this.docId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -143,52 +148,77 @@ class PendingWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
-              SizedBox(
-                width: 190,
-                height: 45,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.orange[300], // Text color
-                      side: const BorderSide(color: Colors.black), // Border color
-                      shadowColor: Colors.grey, // Shadow color
-                      elevation: 5,
-                      // Elevation (controls the intensity of the shadow)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 2.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.orange[300], // Text color
+                        side: const BorderSide(color: Colors.black), // Border color
+                        shadowColor: Colors.grey, // Shadow color
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MapPage(data: data),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Open with map',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Image.asset(
+                              'assets/images/google-maps.png',
+                              width: 20,
+                              height: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    style: IconButton.styleFrom(
+                      side: const BorderSide(color: Colors.black),
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.circular(15), // Border radius
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddPickupDetails(data: data, docId: docId),
+                        ),
+                      );
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Open with map',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Image.asset(
-                            'assets/images/google-maps.png',
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                      ],
+                    icon: const Icon(
+                      Icons.add_box_outlined,
+                      color: Colors.lightGreenAccent,
+                      size: 30,
                     ),
                   ),
-                ),
+                ],
               ),
               const SizedBox(height: 5),
             ],

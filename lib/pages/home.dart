@@ -1,7 +1,67 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int completedPickups = 0, pendingPickups = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCompletedPickups();
+    fetchPendingPickups();
+  }
+
+  Future<int> getCompletedPickupCount() async{
+    try {
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('pickups').where('status', isEqualTo: 'Completed').get();
+      final int completedCount = querySnapshot.size;
+      return completedCount;
+      // print('Completed Pickups Count: $completedCount');
+    }catch (error){
+      print('Error fetching completed pickups: $error');
+      rethrow;
+    }
+  }
+
+  Future<void> fetchCompletedPickups() async {
+    try {
+      final int count = await getCompletedPickupCount();
+      setState(() {
+        completedPickups = count;
+      });
+    } catch (error) {
+      print('Error fetching completed pickups: $error');
+    }
+  }
+
+  Future<int> getPendingPickupCount() async {
+    try{
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('pickups').where('status', isEqualTo: 'Pending').get();
+      final int pendingCount = querySnapshot.size;
+      return pendingCount;
+    }catch (error){
+      print('Error fetching pending pickups: $error');
+      rethrow;
+    }
+  }
+
+  Future<void> fetchPendingPickups() async {
+    try{
+      final int count = await getPendingPickupCount();
+      setState(() {
+        pendingPickups = count;
+      });
+    }catch (error){
+      print('Error fetching pending pickups: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +113,7 @@ class Home extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 5.0, vertical: 30.0),
+                      horizontal: 5.0, vertical: 20.0),
                   child: Container(
                     width: 150.0,
                     height: 200.0,
@@ -76,8 +136,8 @@ class Home extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            '12',
-                            style: TextStyle(
+                            '$completedPickups',
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
                             ),
@@ -92,12 +152,12 @@ class Home extends StatelessWidget {
                                 Navigator.pushNamed(
                                     context, '/complete_pickup');
                               },
-                              child: Text(
+                              child: const Text(
                                 'Completed Pickups',
                                 textAlign: TextAlign.center,
                               ),
                               style: OutlinedButton.styleFrom(
-                                side: BorderSide(color: Colors.green),
+                                side: const BorderSide(color: Colors.green),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(17.0),
                                 ),
@@ -124,15 +184,14 @@ class Home extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4.0, horizontal: 20.0),
+                            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
                             child: Image.asset('assets/images/Expired.png'),
                           ),
                         ),
                         Expanded(
                           child: Text(
-                            '5',
-                            style: TextStyle(
+                            '$pendingPickups',
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
                             ),

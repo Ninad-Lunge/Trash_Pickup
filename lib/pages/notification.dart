@@ -17,23 +17,19 @@ class Notifications extends StatelessWidget {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
-                child: Text(
-                  'Notifications',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28.0,
-                  ),
+              const Text(
+                'Notifications',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.0,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               for (String data in notificationData)
                 NotificationWidget(data: data),
             ],
@@ -76,17 +72,9 @@ class NotificationWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Colors.black, width: 1), // Stroke
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
-                spreadRadius: 2,
-                blurRadius: 2,
-                offset: Offset(0, 2), // changes position of shadow
-              ),
-            ],
+            border: Border.all(color: Colors.black, width: 1),
           ),
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Row(
             children: [
               Expanded(
@@ -95,7 +83,7 @@ class NotificationWidget extends StatelessWidget {
                   children: [
                     Text(
                       '$data',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -135,7 +123,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
       child: Container(
         child: BottomNavigationBar(
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.menu),
               label: 'Menu',
