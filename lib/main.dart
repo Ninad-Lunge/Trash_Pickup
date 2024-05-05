@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trashpickup/pages/auth_page.dart';
 import 'package:trashpickup/pages/register.dart';
-import 'package:trashpickup/pages/login.dart';
-import 'package:trashpickup/pages/start.dart';
 import 'package:trashpickup/pages/home.dart';
 import 'package:trashpickup/pages/complete_pickup.dart';
 import 'package:trashpickup/pages/pending_pickup.dart';
