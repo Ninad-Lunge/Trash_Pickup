@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:trashpickup/pages/add_pickup_details.dart';
-import 'map_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class PendingPickup extends StatelessWidget {
+class PendingPickup extends StatefulWidget {
   const PendingPickup({Key? key}) : super(key: key);
 
+  @override
+  State<PendingPickup> createState() => _PendingPickupState();
+}
+
+class _PendingPickupState extends State<PendingPickup> {
+  // TextEditingController locationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +49,8 @@ class PendingPickup extends StatelessWidget {
               time: time,
               date: date,
               address: data['location'] ?? '',
+              latitude: data['latitude'] ?? '',
+              longitude: data['longitude'] ?? '',
             );
           }).toList();
 
@@ -77,20 +85,29 @@ class PendingData {
   final String time;
   final DateTime date;
   final String address;
+  final String latitude;
+  final String longitude;
 
   PendingData({
     required this.time,
     required this.date,
     required this.address,
+    required this.latitude,
+    required this.longitude
   });
 }
 
-class PendingWidget extends StatelessWidget {
+class PendingWidget extends StatefulWidget {
   final PendingData data;
   final String docId;
 
   const PendingWidget({Key? key, required this.data, required this.docId}) : super(key: key);
 
+  @override
+  State<PendingWidget> createState() => _PendingWidgetState();
+}
+
+class _PendingWidgetState extends State<PendingWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -124,21 +141,21 @@ class PendingWidget extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Time: ${data.time} \n', // Format time for display
+                      text: 'Time: ${widget.data.time} \n', // Format time for display
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     TextSpan(
-                      text: 'Date: ${DateFormat('dd MMMM yyyy').format(data.date)} \n', // Format date for display
+                      text: 'Date: ${DateFormat('dd MMMM yyyy').format(widget.data.date)} \n', // Format date for display
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     TextSpan(
-                      text: 'Address: ${data.address} \n',
+                      text: 'Address: ${widget.data.address} \n',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -167,12 +184,9 @@ class PendingWidget extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MapPage(data: data),
-                          ),
-                        );
+                        String Latitude = widget.data.latitude;
+                        String Longitude = widget.data.longitude;
+                        launchUrl(Uri.parse('https://www.google.com/maps?q=$Latitude,$Longitude'));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -208,7 +222,7 @@ class PendingWidget extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AddPickupDetails(data: data, docId: docId),
+                          builder: (context) => AddPickupDetails(data: widget.data, docId: widget.docId),
                         ),
                       );
                     },
