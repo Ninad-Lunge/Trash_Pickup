@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -10,6 +11,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int completedPickups = 0, pendingPickups = 0;
+
+  final user = FirebaseAuth.instance.currentUser!;
+
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
 
   @override
   void initState() {
@@ -78,6 +85,7 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
+        actions: [IconButton(onPressed: signUserOut, icon: Icon(Icons.logout))],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),

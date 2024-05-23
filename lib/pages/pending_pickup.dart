@@ -5,7 +5,7 @@ import 'package:trashpickup/pages/add_pickup_details.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PendingPickup extends StatefulWidget {
-  const PendingPickup({Key? key}) : super(key: key);
+  const PendingPickup({super.key});
 
   @override
   State<PendingPickup> createState() => _PendingPickupState();
@@ -67,7 +67,7 @@ class _PendingPickupState extends State<PendingPickup> {
                     itemCount: pendingDataList.length,
                     itemBuilder: (context, index) {
                       final docId = snapshot.data!.docs[index].id; // Retrieve the document ID here
-                      print('${docId}\n');
+                      print('$docId\n');
                       return PendingWidget(data: pendingDataList[index], docId: docId); // Pass the document ID here
                     },
                   ),
